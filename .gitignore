@@ -1,24 +1,54 @@
-./bin
-./lib
-./out
+# Exclude folders
+target
 
-config_example.properties
-**/*.properties
-**/*.settings
-*.class
-*.log
+# Eclipse
+.classpath/
+.project/
+.settings/
+.externalToolBuilders/
+*.launch
+.target
+
+# IntelliJ
+.idea/ 
+.idea_modules/ 
+*.iml
 *.ipr
 *.iws
-*.iml
-*.cache
-dist/*
-target/
-lib_managed/
-src_managed/
-project/boot/
-project/plugins/project/
-.scala_dependencies
-.DS_Store
-.project
-.classpath
-.cache
+.lib/
+
+# Netbeans
+.classpath_nb/
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+.nb-gradle/
+
+# Ensime and Emacs
+*~
+.ensime
+.ensime_cache/
+.ensime_lucene/
+
+
+## REMOVE THIS IN FUTURE
+#./bin
+#./lib
+#./out
+#config_example.properties
+#**/*.properties
+#**/*.settings
+#*.class
+#*.log
+#*.cache
+#dist/*
+#lib_managed/
+#src_managed/
+#project/boot/
+#project/plugins/project/
+#.scala_dependencies
+#.DS_Store
+#.cache
