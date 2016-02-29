@@ -176,10 +176,14 @@ def makeModule(p: sbt.Project): sbt.Project =
 
 lazy val root =
   makeRoot(project.in(file(".")))
-    .aggregate(core /*,database,chart,util */ )
+    .aggregate(core /*,wip,database,chart,util */ )
 
 lazy val core =
   makeModule(project.in(file("core")))
+    .settings(dependencies: _*)
+
+lazy val wip =
+  makeModule(project.in(file("wip")))
     .settings(dependencies: _*)
 
 lazy val database =
