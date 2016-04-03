@@ -175,32 +175,32 @@ def makeModule(p: sbt.Project): sbt.Project =
 
 //import EnrichProject._
 
-lazy val root =
-  makeRoot(project.in(file(".")))
-    .aggregate(core, wip, examples /*,wip,database,chart,util */ )
-
-lazy val core =
-  makeModule(project.in(file("core")))
-    .settings(dependencies: _*)
-
-lazy val wip =
-  makeModule(project.in(file("wip")))
-    .settings(dependencies: _*)
-
-lazy val wip =
-  makeModule(project.in(file("examples")))
-    .settings(dependencies: _*)
-
-lazy val database =
-  makeModule(project.in(file("database")))
-    .settings(dependencies: _*)
-
-lazy val chart =
-  makeModule(project.in(file("chart")))
-    .settings(dependencies: _*)
-
-lazy val util =
-  makeModule(project.in(file("util")))
-    .settings(dependencies: _*)
+//lazy val root =
+//  makeRoot(project.in(file(".")))
+//    .aggregate(wip, examples /*,wip,database,chart,util */ )
+//
+//lazy val core =
+//  makeModule(project.in(file("core")))
+//    .settings(dependencies: _*)
+//
+//lazy val wip =
+//  makeModule(project.in(file("wip")))
+//    .settings(dependencies: _*)
+//
+//lazy val wip =
+//  makeModule(project.in(file("examples")))
+//    .settings(dependencies: _*)
+//
+//lazy val database =
+//  makeModule(project.in(file("database")))
+//    .settings(dependencies: _*)
+//
+//lazy val chart =
+//  makeModule(project.in(file("chart")))
+//    .settings(dependencies: _*)
+//
+//lazy val util =
+//  makeModule(project.in(file("util")))
+//    .settings(dependencies: _*)
 
 //----------------------------------------------------------------------------------------------------------------------
