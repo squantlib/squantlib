@@ -1,9 +1,9 @@
-package org
+package net.squantlib
 
 /**
   * Created by ceb on 02/04/16.
   */
-package object qls {
+package object numerictypes {
   type Integer = Int
   type BigInteger = Long
   type Natural = Double // >= 0
@@ -16,4 +16,5 @@ package object qls {
   type Spread = Double
   type Volatility = Double
   type Probability = Double
+  // type DayCounter =
 }

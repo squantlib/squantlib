@@ -1,47 +1,38 @@
 package org.qls
 
-  import java.text.SimpleDateFormat
+import net.squantlib.numerictypes._
+import org.jquantlib.time.Date
+import org.jquantlib.time.calendars.Target
 
-  //import java.util.{ Date, Locale }
+/**
+  * Created by ceb on 31/03/16.
+  */
+object EquityOption extends App {
 
-  /**
-    * Created by ceb on 31/03/16.
-    */
-  object EquityOption extends App{
+  // set a timer
+  val start = System.nanoTime
 
-    // set a timer
-    val start = System.nanoTime
+  // set up dates
+  val calendar = new Target
+//  println("16.04.2016 is a business day? => " + calendar.isBusinessDay(new Date(16, 4, 2016)))
+  val todaysDate = new Date(15, 5, 1998)
+  val settlementDate = new Date(7, 5, 1998)
+  println(todaysDate)
+  //class Singleton< T >
+  //Settings::instance().evaluationDate() = todaysDate;
 
-    // set up dates
-    //Calendar calendar = TARGET();
-    //Calendar is part of BlackVolTermStructure>VolatilityTermStructure>TermStructure
-    val sdf = new SimpleDateFormat("dd, MMM, yyyy")
-    val todaysDate = sdf.parse("15, May, 1998")
-    val settlementDate = sdf.parse("17, May, 1998")
-    println(todaysDate)
-    //class Singleton< T >
-    //Settings::instance().evaluationDate() = todaysDate;
-
-    // our options
-    //  Option::Type type(Option::Put);
+  // our options
+  //  Option::Type type(Option::Put);
+  val underlying: Real = 36
+  val strike: Real = 40
+  val dividendYield: Spread = 0.00
+  val riskFreeRate: Rate = 0.06
+  val volatility: Volatility = 0.20
+  val maturity = new Date(17, 5, 1998)
+  //  DayCounter dayCounter = Actual365Fixed();
 
   /*
-        boost::timer timer;
-        std::cout << std::endl;
-        // set up dates
-        Calendar calendar = TARGET();
-        Date todaysDate(15, May, 1998);
-        Date settlementDate(17, May, 1998);
-        Settings::instance().evaluationDate() = todaysDate;
-        // our options
-        Option::Type type(Option::Put);
-        Real underlying = 36;
-        Real strike = 40;
-        Spread dividendYield = 0.00;
-        Rate riskFreeRate = 0.06;
-        Volatility volatility = 0.20;
-        Date maturity(17, May, 1999);
-        DayCounter dayCounter = Actual365Fixed();
+
         std::cout << "Option type = "  << type << std::endl;
         std::cout << "Maturity = "        << maturity << std::endl;
         std::cout << "Underlying price = "        << underlying << std::endl;
@@ -336,6 +327,6 @@ package org.qls
                   << std::setw(widths[3]) << std::left << americanOption.NPV()
                   << std::endl;
                      */
-        // End test
-    println("\nRun completed in " + (System.nanoTime - start)/1e9 + " seconds")
+  // End test
+  println("\nRun completed in " + (System.nanoTime - start) / 1e9 + " seconds")
 }
