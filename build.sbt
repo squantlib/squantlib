@@ -4,8 +4,8 @@ import sbt.Keys._
 val `app.organization` = "org.jquantlib.foss"
 val `app.name` = "qls"
 
-val `java.version`  = "1.7"
-val `scala.version` = "2.11.7"
+val `java.version`  = "1.8"
+val `scala.version` = "2.11.8"
 
 val `otest.version` = "0.2.4"
 
@@ -149,6 +149,7 @@ lazy val dependencies: Seq[Setting[_]] =
       // com.typesafe"       %% "scalalogging-slf4j"  % "1.1.0" % "optional",
       // org.slf4j"          %  "slf4j-api"           % "1.7.5" % "optional",
       // ch.qos.logback"     %  "logback-classic"     % "1.0.7" % "optional",
+      "org.scalatest"      %% "scalatest"           % "2.2.6",
       "org.jquantlib.qlj"  %  "core"                % "0.3.0-SNAPSHOT" % "optional",
       "org.apache.commons" %  "commons-lang3"       % "3.1"            % "optional",
       "org.apache.commons" %  "commons-math3"       % "3.0"            % "optional" ))
@@ -176,7 +177,7 @@ def makeModule(p: sbt.Project): sbt.Project =
 
 lazy val root =
   makeRoot(project.in(file(".")))
-    .aggregate(core /*,wip,database,chart,util */ )
+    .aggregate(core, wip, examples /*,wip,database,chart,util */ )
 
 lazy val core =
   makeModule(project.in(file("core")))
@@ -184,6 +185,10 @@ lazy val core =
 
 lazy val wip =
   makeModule(project.in(file("wip")))
+    .settings(dependencies: _*)
+
+lazy val wip =
+  makeModule(project.in(file("examples")))
     .settings(dependencies: _*)
 
 lazy val database =
