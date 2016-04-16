@@ -1,6 +1,8 @@
 package org.qls
 
 import net.squantlib.numerictypes._
+import org.jquantlib.Settings
+import org.jquantlib.daycounters.Actual365Fixed
 import org.jquantlib.time.Date
 import org.jquantlib.time.calendars.Target
 
@@ -17,19 +19,20 @@ object EquityOption extends App {
 //  println("16.04.2016 is a business day? => " + calendar.isBusinessDay(new Date(16, 4, 2016)))
   val todaysDate = new Date(15, 5, 1998)
   val settlementDate = new Date(7, 5, 1998)
-  println(todaysDate)
-  //class Singleton< T >
-  //Settings::instance().evaluationDate() = todaysDate;
+//  println(todaysDate)
+  val settings = new Settings
+  settings.setEvaluationDate(todaysDate)
 
   // our options
   //  Option::Type type(Option::Put);
+  //val type = Put
   val underlying: Real = 36
   val strike: Real = 40
   val dividendYield: Spread = 0.00
   val riskFreeRate: Rate = 0.06
   val volatility: Volatility = 0.20
   val maturity = new Date(17, 5, 1998)
-  //  DayCounter dayCounter = Actual365Fixed();
+  val dayCounter = new Actual365Fixed
 
   /*
 
