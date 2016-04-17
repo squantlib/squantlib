@@ -25,7 +25,8 @@ object EquityOption extends App {
 
   // our options
   //  Option::Type type(Option::Put);
-  //val type = Put
+  import net.squantlib.numerictypes.Option._
+  val otype = Put
   val underlying: Real = 36
   val strike: Real = 40
   val dividendYield: Spread = 0.00

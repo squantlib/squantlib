@@ -17,4 +17,9 @@ package object numerictypes {
   type Volatility = Double
   type Probability = Double
   // type DayCounter =
+
+  object Option extends Enumeration {
+    type Option = Value
+    val Call, Put = Value
+  }
 }
