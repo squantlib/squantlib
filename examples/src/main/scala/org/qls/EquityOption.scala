@@ -6,7 +6,6 @@ import org.jquantlib.Settings
 import org.jquantlib.daycounters.Actual365Fixed
 import org.jquantlib.time.Date
 import org.jquantlib.time.calendars.Target
-import java.text.NumberFormat
 
 /**
   * Created by ceb on 31/03/16.
@@ -26,7 +25,7 @@ object EquityOption extends App {
   settings.setEvaluationDate(todaysDate)
 
   // our options
-  val otype = Put
+  val optionType = Put
   val underlying: Real = 36
   val strike: Real = 40
   val dividendYield: Spread = 0.00
@@ -35,16 +34,15 @@ object EquityOption extends App {
   val maturity = new Date(17, 5, 1999)
   val dayCounter = new Actual365Fixed
 
-  val pcFormat = NumberFormat.getPercentInstance
-  pcFormat.setMinimumFractionDigits(1)
-
-  println(s"Option type = $otype")
+  println(s"Option type = $optionType")
   println(s"Maturity = $maturity")
   println(f"Underlying price = $underlying%2.0f")
   println(f"Strike = $strike%2.0f")
-  println("Risk-free interest rate = " + pcFormat.format(riskFreeRate))
-  println("Dividend yield = " + pcFormat.format(dividendYield))
-  println("Volatility = " + pcFormat.format(volatility))
+  println(f"Risk-free interest rate = ${100*riskFreeRate}%2.1f%%")
+  println(f"Dividend yield = ${100*dividendYield}%2.1f%%")
+  println(f"Volatility = ${100*volatility}%2.1f%%")
+
+  // write column headings
 
   /*
         // write column headings
