@@ -1,11 +1,8 @@
 package org.qls
 
-import net.squantlib.numerictypes.Option._
 import net.squantlib.numerictypes._
-import org.jquantlib.Settings
-import org.jquantlib.daycounters.Actual365Fixed
 import org.jquantlib.time.Date
-import org.jquantlib.time.calendars.Target
+import org.jquantlib.exercise._
 
 /**
   * Created by ceb on 31/03/16.
@@ -16,54 +13,45 @@ object EquityOption extends App {
   val start = System.nanoTime
 
   // set up dates
-  val calendar = new Target
-//  println("16.04.2016 is a business day? => " + calendar.isBusinessDay(new Date(16, 4, 2016)))
+  val calendar = new org.jquantlib.time.calendars.Target
   val todaysDate = new Date(15, 5, 1998)
   val settlementDate = new Date(7, 5, 1998)
-//  println(todaysDate)
-  val settings = new Settings
+  val settings = new org.jquantlib.Settings
   settings.setEvaluationDate(todaysDate)
 
   // our options
-  val optionType = Put
+  //import net.squantlib.numerictypes.Option._
+  val optionType = net.squantlib.numerictypes.Option.Put
   val underlying: Real = 36
   val strike: Real = 40
   val dividendYield: Spread = 0.00
   val riskFreeRate: Rate = 0.06
   val volatility: Volatility = 0.20
   val maturity = new Date(17, 5, 1999)
-  val dayCounter = new Actual365Fixed
+  val dayCounter = new org.jquantlib.daycounters.Actual365Fixed
 
   println(s"Option type = $optionType")
   println(s"Maturity = $maturity")
   println(f"Underlying price = $underlying%2.0f")
   println(f"Strike = $strike%2.0f")
-  println(f"Risk-free interest rate = ${100*riskFreeRate}%2.1f%%")
-  println(f"Dividend yield = ${100*dividendYield}%2.1f%%")
-  println(f"Volatility = ${100*volatility}%2.1f%%")
+  println(f"Risk-free interest rate = ${100 * riskFreeRate}%2.1f%%")
+  println(f"Dividend yield = ${100 * dividendYield}%2.1f%%")
+  println(f"Volatility = ${100 * volatility}%2.1f%%")
 
   // write column headings
+  // ...
 
+  //  for (Integer i=1; i<=4; i++)
+  //  exerciseDates.push_back(settlementDate + 3*i*Months);
+  val exerciseDates = Array(settlementDate, settlementDate)
+  val europeanExercise = new EuropeanExercise(maturity)
+  val bermudanExercise = new BermudanExercise(exerciseDates)
+  val americanExercise = new AmericanExercise(settlementDate, maturity)
+
+  val underlyingH = new org.jquantlib.quotes.SimpleQuote(underlying)
   /*
-        // write column headings
-        Size widths[] = { 35, 14, 14, 14 };
-        std::cout << std::setw(widths[0]) << std::left << "Method"
-                  << std::setw(widths[1]) << std::left << "European"
-                  << std::setw(widths[2]) << std::left << "Bermudan"
-                  << std::setw(widths[3]) << std::left << "American"
-                  << std::endl;
-
-        std::vector<Date> exerciseDates;
-        for (Integer i=1; i<=4; i++)
-            exerciseDates.push_back(settlementDate + 3*i*Months);
-        boost::shared_ptr<Exercise> europeanExercise(
-                                         new EuropeanExercise(maturity));
-        boost::shared_ptr<Exercise> bermudanExercise(
-                                         new BermudanExercise(exerciseDates));
-        boost::shared_ptr<Exercise> americanExercise(
-                                         new AmericanExercise(settlementDate,
-                                                              maturity));
-        Handle<Quote> underlyingH(
+  import org.jquantlib.quotes.SimpleQuote
+          Handle<Quote> underlyingH(
             boost::shared_ptr<Quote>(new SimpleQuote(underlying)));
         // bootstrap the yield/dividend/vol curves
         Handle<YieldTermStructure> flatTermStructure(
