@@ -1,10 +1,12 @@
 package org.qls
 
+import net.squantlib.numerictypes.Option._
 import net.squantlib.numerictypes._
 import org.jquantlib.Settings
 import org.jquantlib.daycounters.Actual365Fixed
 import org.jquantlib.time.Date
 import org.jquantlib.time.calendars.Target
+import java.text.NumberFormat
 
 /**
   * Created by ceb on 31/03/16.
@@ -24,32 +26,27 @@ object EquityOption extends App {
   settings.setEvaluationDate(todaysDate)
 
   // our options
-  //  Option::Type type(Option::Put);
-  import net.squantlib.numerictypes.Option._
   val otype = Put
   val underlying: Real = 36
   val strike: Real = 40
   val dividendYield: Spread = 0.00
   val riskFreeRate: Rate = 0.06
   val volatility: Volatility = 0.20
-  val maturity = new Date(17, 5, 1998)
+  val maturity = new Date(17, 5, 1999)
   val dayCounter = new Actual365Fixed
 
-  /*
+  val pcFormat = NumberFormat.getPercentInstance
+  pcFormat.setMinimumFractionDigits(1)
 
-        std::cout << "Option type = "  << type << std::endl;
-        std::cout << "Maturity = "        << maturity << std::endl;
-        std::cout << "Underlying price = "        << underlying << std::endl;
-        std::cout << "Strike = "                  << strike << std::endl;
-        std::cout << "Risk-free interest rate = " << io::rate(riskFreeRate)
-                  << std::endl;
-        std::cout << "Dividend yield = " << io::rate(dividendYield)
-                  << std::endl;
-        std::cout << "Volatility = " << io::volatility(volatility)
-                  << std::endl;
-        std::cout << std::endl;
-        std::string method;
-        std::cout << std::endl ;
+  println(s"Option type = $otype")
+  println(s"Maturity = $maturity")
+  println(f"Underlying price = $underlying%2.0f")
+  println(f"Strike = $strike%2.0f")
+  println("Risk-free interest rate = " + pcFormat.format(riskFreeRate))
+  println("Dividend yield = " + pcFormat.format(dividendYield))
+  println("Volatility = " + pcFormat.format(volatility))
+
+  /*
         // write column headings
         Size widths[] = { 35, 14, 14, 14 };
         std::cout << std::setw(widths[0]) << std::left << "Method"
@@ -57,6 +54,7 @@ object EquityOption extends App {
                   << std::setw(widths[2]) << std::left << "Bermudan"
                   << std::setw(widths[3]) << std::left << "American"
                   << std::endl;
+
         std::vector<Date> exerciseDates;
         for (Integer i=1; i<=4; i++)
             exerciseDates.push_back(settlementDate + 3*i*Months);
